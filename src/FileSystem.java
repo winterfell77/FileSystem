@@ -7,7 +7,7 @@ import java.util.*;
 abstract class files{
   String name;
   int uniqueId;
-  files parent; //parent file
+  files parent;
   Boolean isfolder;
 
   public files(String name, int uniqueId){
@@ -47,7 +47,7 @@ class folder extends files{
 }
 
 
-class SigmaFileSystem {
+class FileSystem {
 
   Map<Integer,files> filesystem;
   private int totalDashboards = 0;
@@ -55,7 +55,7 @@ class SigmaFileSystem {
   folder root;
   int possibleDepth=0;
 
-  public SigmaFileSystem() {
+  public FileSystem() {
     filesystem = new HashMap<>();
     root = new folder("MyDocuments",0);  //assumption root is mydocuments and 0 as uniqueid
     filesystem.put(0,root);
@@ -189,7 +189,7 @@ class Solution {
   public static void runExample() {
 
     // compared output against expected output
-    SigmaFileSystem fs = new SigmaFileSystem();
+    FileSystem fs = new FileSystem();
     int rootId = fs.getFileId("MyDocuments", 0);
     fs.addNewFile("draft", "folder", 1, rootId);           //i added a paramter of the unique id because i noticed that there wasn't a paarameter for it
     fs.addNewFile("complete", "folder", 2, rootId);    //added unique id parameter
@@ -225,86 +225,12 @@ class Solution {
     fs.printFiles();
   }
 
-  // Feel free to modify this main function as you see fit.
+
   public static void main(String[] args) {
-
-  //TESTING SEQUENCE
-    /*
-    //I tested my functinons by testing for the correctness of the functions after a certain input and seeing if the result matched the expectation, to which it will return PASS. If it does not match the expectation, it will return false. I also tested the run_example function and matched it with my drawings on paper as I followed along to ensure the correctness of the function.
-    SigmaFileSystem fs =new SigmaFileSystem();
-    if(fs.getFileId("MyDocuments",0)==0){
-      System.out.println("PASS");
-    } else{
-      System.out.println("FAIL");
-    }
-
-    fs.addNewFile("allen","folder",1,0);
-    if(fs.getFileId("allen",0)==1){
-      System.out.println("PASS");
-    } else{
-      System.out.println("FAIL");
-    }
-
-    fs.addNewFile("erin","worksheet",2,0);
-    if(fs.getFileId("erin",0)==2){
-      System.out.println("PASS");
-    } else{
-      System.out.println("FAIL");
-    }
-    fs.addNewFile("holly","dashboard",3,1);
-    if(fs.getFileId("holly",1)==3){
-      System.out.println("PASS");
-    } else{
-      System.out.println("FAIL");
-    }
-    fs.printFiles();
-    fs.moveFile(3,0);
-    if(fs.getFileId("holly",0)==3){
-      System.out.println("PASS");
-    } else{
-      System.out.println("FAIL");
-    }
-    fs.printFiles();
-    fs.addNewFile("katie","folder",4, 0);
-    if(fs.getFileId("katie",0)==4){
-      System.out.println("PASS");
-    } else{
-      System.out.println("FAIL");
-    }
-    fs.printFiles();
-    String[] temp = {"allen","erin","holly","katie"};
-    if(Arrays.equals(fs.getFiles(0), temp)){
-      System.out.println("PASS");
-    } else{
-      System.out.println("FAIL");
-    }
-    fs.moveFile(4,1);
-    fs.addNewFile("christianna","folder",5,0);
-    fs.addNewFile("computer","dashboard",6,5);
-    fs.moveFile(5,1);
-    fs.addNewFile("laptop","worksheet",7,5);
-    fs.addNewFile("erin","worksheet",8,4);  //test for duplicate name but different file(in different folder)
-    fs.addNewFile("dog","worksheet",9,1);
-    fs.addNewFile("cat","folder",10,5);
-    fs.addNewFile("basektball","dashboard",11,10);
-    fs.addNewFile("ipad","dashboard",12,4);
-    fs.printFiles();
-    if(fs.getTotalDashboards()==4){
-      System.out.println("PASS");
-    } else{
-      System.out.println("FAIL");
-    }
-    if(fs.getTotalWorksheets()==4){
-      System.out.println("PASS");
-    } else{
-      System.out.println("FAIL");
-    }
-*/
-
 
     boolean running = true;
     Scanner scanner = new Scanner(System.in);
-    SigmaFileSystem fs = new SigmaFileSystem();
+    FileSystem fs = new FileSystem();
     int command;
     while (running) {
       command = askForInteger(scanner, "\nEnter an integer to indicate a command: \n[1] get_total_dashboards\n[2] get_total_worksheets\n[3] add_new_file\n[4] get_file_id\n[5] move_file\n[6] get_files \n[7] print_files\n[8] exit\n");         //I changed it to from add new folder to add new file, because the function should be able to add any file
