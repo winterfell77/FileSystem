@@ -1,7 +1,3 @@
-/*
- * Click `Run` in the top left corner to run the command line program. Output will appear in the "Program Output" tab in the right pane.
- */
-
 import java.io.*;
 import java.util.*;
 abstract class files{
@@ -164,16 +160,7 @@ class FileSystem {
 
 }
 
-/////////////////////////////////////////////////////////
-// YOU DO NOT NEED TO MAKE CHANGES BELOW UNLESS NECESSARY
-/////////////////////////////////////////////////////////
 
-/*
- * Note from Coder Pad: To execute Java, please define "static void main" on a class
- * named Solution.
- *
- * If you need more classes, simply define them inline.
- */
 class Solution {
 
   private static int askForInteger(Scanner scanner, String question) {
